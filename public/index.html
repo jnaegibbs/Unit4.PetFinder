@@ -6,10 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Document</title>
+    
 </head>
 <body>
     <h1>Pet Finder</h1>
-    
+    <button>Load Pet Data</button>
+    <ul></ul>
+    <script>
+        const button = document.querySelector("button");
+        const ul = document.querySelector("ul");
+        button.addEventListener("click", () => {
+            fetch("http://localhost:8080/api/v1/pets")
+            .then(res => res.json())
+            .then(pets => {
+                pets.forEach((pet)=> {
+                    const li = document.createElement('li');
+                    li.textContent = pet.name;
+                    ul.appendChild(li);
+                });
+            })
+        })
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
